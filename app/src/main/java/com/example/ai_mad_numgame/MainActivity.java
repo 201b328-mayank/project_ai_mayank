@@ -76,45 +76,77 @@ public class MainActivity extends AppCompatActivity {
         //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
         String operator = operators[random.nextInt(4)];
         textView2.setText(operand1 + operator + operand2);
+        boolean check = false;
         if (operator.equals("+"))
                 correctAns = operand1 + operand2;
         else if (operator.equals("-"))
                 correctAns = operand1 - operand2;
+        else if(operator.equals("*"))
+            correctAns = operand1*operand2;
         else if (operator.equals("/")){
-            while(operand2 == 0)
-                operand2 = random.nextInt(10);
-            correctAns = operand1/operand2;
+            if(operand2 == 0) {
+                check = true;
+            }
+            else{
+                correctAns = operand1/operand2;
+            }
         }
 
-        else
-            correctAns = operand1*operand2;
       // Your code here, to diplay correct and incorrect options on the buttons
         correctButton = random.nextInt(4);
-        if (correctButton == 0){
-            button1.setText(correctAns+ "");
-            button2.setText(correctAns -1 + "");
-            button3.setText(correctAns-2+"");
-            button4.setText(correctAns+3+ "");
-        }
-        else if (correctButton == 1){
-            button1.setText(correctAns-1 + "");
-            button2.setText(correctAns+ "");
-            button3.setText(correctAns-2+ "");
-            button4.setText(correctAns+2 + "");
+
+        if(check){
+            if (correctButton == 0){
+                button1.setText("Not Define");
+                button2.setText(correctAns -1 + "");
+                button3.setText(correctAns-2+"");
+                button4.setText(correctAns+3+ "");
+            }
+            else if (correctButton == 1){
+                button1.setText(correctAns-1 + "");
+                button2.setText("Not Define");
+                button3.setText(correctAns-2+ "");
+                button4.setText(correctAns+2 + "");
+            }
+            else if (correctAns == 2){
+                button1.setText(correctAns-2+ "");
+                button2.setText(correctAns+1+ "");
+                button3.setText("Not Define");
+                button4.setText(correctAns+2+ "");
+            }
+            else{
+                button1.setText(correctAns-2+ "");
+                button2.setText(correctAns+3+"");
+                button3.setText(correctAns-1+"");
+                button4.setText("Not Define");
+            }
+        }else{
+            if (correctButton == 0){
+                button1.setText(correctAns+ "");
+                button2.setText(correctAns -1 + "");
+                button3.setText(correctAns-2+"");
+                button4.setText(correctAns+3+ "");
+            }
+            else if (correctButton == 1){
+                button1.setText(correctAns-1 + "");
+                button2.setText(correctAns+ "");
+                button3.setText(correctAns-2+ "");
+                button4.setText(correctAns+2 + "");
+            }
+            else if (correctAns == 2){
+                button1.setText(correctAns-2+ "");
+                button2.setText(correctAns+1+ "");
+                button3.setText(correctAns+ "");
+                button4.setText(correctAns+2+ "");
+            }
+            else{
+                button1.setText(correctAns-2+ "");
+                button2.setText(correctAns+3+"");
+                button3.setText(correctAns-1+"");
+                button4.setText(correctAns+ "");
+            }
         }
 
-        else if (correctAns == 2){
-            button1.setText(correctAns-2+ "");
-            button2.setText(correctAns+1+ "");
-            button3.setText(correctAns+ "");
-            button4.setText(correctAns+2+ "");
-        }
-        else{
-            button1.setText(correctAns-2+ "");
-            button2.setText(correctAns+3+"");
-            button3.setText(correctAns-1+"");
-            button4.setText(correctAns+ "");
-        }
         if(matchCounter==3){    // if three matches are completed updatee the perfomrance in sharedpreferences
 
             matchCounter=0;
